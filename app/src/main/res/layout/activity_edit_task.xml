@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212832"
+    tools:context=".EditTaskActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="#2C3E50"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        app:contentPadding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title of the Create Task Form -->
+            <TextView
+                android:id="@+id/editTaskTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="Create Task"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <!-- Task Title Label -->
+            <TextView
+                android:id="@+id/editTaskTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="Title"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <!-- Task Title EditText -->
+            <EditText
+                android:id="@+id/editTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:contentDescription="Title"
+                android:ems="10"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="#FFFFFF" />
+
+            <!-- Description Label -->
+            <TextView
+                android:id="@+id/editDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="Description"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <!-- Description EditText -->
+            <EditText
+                android:id="@+id/editDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:contentDescription="Description"
+                android:ems="10"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="#FFFFFF" />
+
+            <!-- Priority Label -->
+            <TextView
+                android:id="@+id/editPriorityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="Priority"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!-- Priority Spinner -->
+            <Spinner
+                android:id="@+id/editPrioritySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:spinnerMode="dropdown" />
+
+            <!-- Status Label -->
+            <TextView
+                android:id="@+id/editStatusTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="Status"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!-- Status Spinner -->
+            <Spinner
+                android:id="@+id/editStatusSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:spinnerMode="dropdown" />
+
+            <!-- Deadline Label -->
+            <TextView
+                android:id="@+id/editDeadlineTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="Deadline"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!-- Deadline EditText -->
+            <EditText
+                android:id="@+id/editDeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:focusable="false"
+                android:hint="Select Deadline"
+                android:padding="10dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF" />
+
+            <!-- Add and Cancel Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <!-- Add Task Button -->
+                <Button
+                    android:id="@+id/editAddTaskButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/yellow_color"
+                    android:contentDescription="Add Task"
+                    android:onClick="onSaveBtnClick"
+                    android:text="Add Task"
+                    android:textColor="@color/black" />
+
+                <!-- Cancel Button -->
+                <Button
+                    android:id="@+id/editCancelButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/red_color"
+                    android:contentDescription="Cancel"
+                    android:onClick="onEditCancelBtnClick"
+                    android:text="Cancel"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
