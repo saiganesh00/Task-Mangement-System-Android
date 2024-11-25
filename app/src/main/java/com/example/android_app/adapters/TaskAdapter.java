@@ -25,10 +25,15 @@ import retrofit2.Response;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
-    private final List<Task> taskList;
+    private List<Task> taskList;
 
     public TaskAdapter(List<Task> taskList) {
         this.taskList = taskList;
+    }
+
+    public void updateTaskList(List<Task> newTaskList) {
+        this.taskList = newTaskList;
+        notifyDataSetChanged();
     }
 
     @NonNull

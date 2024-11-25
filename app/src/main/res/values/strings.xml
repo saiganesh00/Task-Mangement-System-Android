@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Android_App</string>
+
+    <!-- Filter Options -->
+    <string-array name="priority_filter_options">
+        <item>All</item>
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
+
+    <string-array name="progress_filter_options">
+        <item>All</item>
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
 </resources>

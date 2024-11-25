@@ -9,8 +9,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +37,7 @@ public class DashboardActivity extends AppCompatActivity {
     private RecyclerView taskRecyclerView;
     private TaskAdapter taskAdapter;
     private List<Task> taskList;
-
+    private Spinner priorityFilter, progressFilter;
     private CardView profileCard;
 
     @Override
@@ -44,7 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         // Set welcome text
         TextView welcomeTxt = findViewById(R.id.dashboardWelcomeText);
-        welcomeTxt.setText("Welcome Back");
+        welcomeTxt.setText("Welcome Back!");
 
         // EMAIL
         SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
@@ -78,8 +81,75 @@ public class DashboardActivity extends AppCompatActivity {
         taskAdapter = new TaskAdapter(taskList);
         taskRecyclerView.setAdapter(taskAdapter);
 
+        // filters
+
+        priorityFilter = findViewById(R.id.priorityFilter);
+        progressFilter = findViewById(R.id.progressFilter);
+
+        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<>(
+                this,
+                R.layout.spinner_item, // Custom layout
+                getResources().getStringArray(R.array.priority_filter_options) // Spinner items
+        );
+        priorityAdapter.setDropDownViewResource(R.layout.spinner_item); // Apply for dropdown items
+        priorityFilter.setAdapter(priorityAdapter);
+
+        ArrayAdapter<String> progressAdapter = new ArrayAdapter<>(
+                this,
+                R.layout.spinner_item,
+                getResources().getStringArray(R.array.progress_filter_options)
+        );
+        progressAdapter.setDropDownViewResource(R.layout.spinner_item);
+        progressFilter.setAdapter(progressAdapter);
+
+
+        // Set listeners for spinners
+        priorityFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                filterTasks();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        progressFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                filterTasks();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         // Fetch tasks from the server
         fetchTasks();
+    }
+
+    private void filterTasks() {
+        Spinner priorityFilter = findViewById(R.id.priorityFilter);
+        Spinner progressFilter = findViewById(R.id.progressFilter);
+
+        String selectedPriority = priorityFilter.getSelectedItem().toString();
+        String selectedProgress = progressFilter.getSelectedItem().toString();
+
+        List<Task> filteredList = new ArrayList<>();
+
+        for (Task task : taskList) {
+            boolean matchesPriority = selectedPriority.equals("All") || task.getPriority().equalsIgnoreCase(selectedPriority);
+            boolean matchesProgress = selectedProgress.equals("All") || task.getStatus().equalsIgnoreCase(selectedProgress);
+
+            if (matchesPriority && matchesProgress) {
+                filteredList.add(task);
+            }
+        }
+
+        // Update RecyclerView
+        taskAdapter.updateTaskList(filteredList);
     }
 
     private void fetchTasks() {
